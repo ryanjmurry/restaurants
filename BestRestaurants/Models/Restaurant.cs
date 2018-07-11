@@ -156,5 +156,106 @@ namespace BestRestaurants.Models
                 conn.Dispose();
             }
         }
+
+        public static Restaurant Find(int id)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM `restaurants` WHERE id = @thisId;";
+
+            MySqlParameter thisId = new MySqlParameter();
+            thisId.ParameterName = "@thisId";
+            thisId.Value = id;
+            cmd.Parameters.Add(thisId);
+
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+            int restaurantId = 0;
+            int cuisineId = 0;
+            string restaurantName = "";
+            string restaurantStreet1 = "";
+            string restaurantStreet2 = "";
+            string restaurantCity = "";
+            string restaurantState = "";
+            int restaurantZip = 0;
+            string restaurantAtmosphere = "";
+            string restaurantPrice = "";
+            string restaurantPortion = "";
+            int restaurantRating = 0;
+            string restaurantComments = "";
+
+            while (rdr.Read())
+            {
+                
+                cuisineId = rdr.GetInt32(1);
+                restaurantName = rdr.GetString(2);
+                restaurantStreet1 = rdr.GetString(3);
+                restaurantStreet2 = rdr.GetString(4);
+                restaurantCity = rdr.GetString(5);
+                restaurantState = rdr.GetString(6);
+                restaurantZip = rdr.GetInt32(7);
+                restaurantAtmosphere = rdr.GetString(8);
+                restaurantPrice = rdr.GetString(9);
+                restaurantPortion = rdr.GetString(10);
+                restaurantRating = rdr.GetInt32(11);
+                restaurantComments = rdr.GetString(12);
+                restaurantId = rdr.GetInt32(0);
+            }
+
+            Restaurant foundRestaurant = new Restaurant(cuisineId, restaurantName, restaurantStreet1, restaurantStreet2, restaurantCity, restaurantState, restaurantZip, restaurantAtmosphere, restaurantPrice, restaurantPortion, restaurantRating, restaurantComments, restaurantId);
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+
+            return foundRestaurant;
+        }
+
+        //public void Update()
+        //{
+        //    MySqlConnection conn = DB.Connection();
+        //    conn.Open();
+        //    var cmd = conn.CreateCommand() as MySqlCommand;
+        //    cmd.CommandText = @"UPDATE restaurants SET type = @AnimalType, breed = @AnimalBreed, gender = @AnimalGender, name = @AnimalName WHERE id = @AnimalId;";
+
+        //    MySqlParameter cuisine_id = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantCuisineId", this.CuisineId);
+        //    MySqlParameter name = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantName", this.Name);
+        //    MySqlParameter street_address_1 = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantStreet_address_1", this.Street1);
+        //    MySqlParameter street_address_2 = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantStreet_address_2", this.Street2);
+        //    MySqlParameter city = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantCity", this.City);
+        //    MySqlParameter state = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantState", this.State);
+        //    MySqlParameter zip = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantZip", this.Zip);
+        //    MySqlParameter atmosphere = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantAtmosphere", this.Atmosphere);
+        //    MySqlParameter price = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantPrice", this.Price);
+        //    MySqlParameter portion = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantPortion", this.Portion);
+        //    MySqlParameter rating = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantRating", this.Rating);
+        //    MySqlParameter comments = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantComments", this.Comments);
+        //    MySqlParameter id = new MySqlParameter();
+        //    cmd.Parameters.AddWithValue("@RestaurantId", this.Id);
+
+        //    cmd.ExecuteNonQuery();
+
+        //    conn.Close();
+        //    if (conn != null)
+        //    {
+        //        conn.Dispose();
+        //    }
+        //}
     }
 }

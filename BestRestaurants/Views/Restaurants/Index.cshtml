@@ -1,0 +1,16 @@
+﻿<div class="container">
+    <div class="jumbotron">
+        <h1>My Restaurants</h1>
+    </div>
+    <a href="/restaurants/new" class="btn btn-success">Add New Restaurant</a>
+
+
+<!--    Have restaurants sorted by Type in a header-->
+    
+    <ul>
+    @foreach (var restaurant in Model)
+    {
+        <li><a href="/restaurants/@restaurant.Id">@restaurant.Name</a></li>
+    }
+    </ul>
+</div>
