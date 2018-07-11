@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BestRestaurants\BestRestaurants.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ModelsTests\" />
+  </ItemGroup>
 </Project>
