@@ -34,5 +34,21 @@ namespace BestRestaurants.Tests
             int result = Restaurant.GetAll().Count;
             Assert.AreEqual(0, result);
         }
+
+        [TestMethod]
+        public void Save_SavesToDatabase_RestaurantList()
+        {
+            //Arrange
+            Restaurant testRestaurant = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5 , "test comment");
+
+            //Act
+            testRestaurant.Save();
+            List<Restaurant> result = Restaurant.GetAll();
+
+            List<Restaurant> testList = new List<Restaurant> { testRestaurant };
+
+            //Assert
+            CollectionAssert.AreEqual(testList, result);
+        }
     }
 }
