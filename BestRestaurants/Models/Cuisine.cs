@@ -106,18 +106,17 @@ namespace BestRestaurants.Models
                 int cuisineId = rdr.GetInt32(1);
                 string restaurantName = rdr.GetString(2);
                 string restaurantStreet1 = rdr.GetString(3);
-                string restaurantStreet2 = rdr.GetString(4);
-                string restaurantCity = rdr.GetString(5);
-                string restaurantState = rdr.GetString(6);
-                int restaurantZip = rdr.GetInt32(7);
-                string restaurantAtmosphere = rdr.GetString(8);
-                string restaurantPrice = rdr.GetString(9);
-                string restaurantPortion = rdr.GetString(10);
-                int restaurantRating = rdr.GetInt32(11);
-                string restaurantComments = rdr.GetString(12);
+                string restaurantCity = rdr.GetString(4);
+                string restaurantState = rdr.GetString(5);
+                int restaurantZip = rdr.GetInt32(6);
+                string restaurantAtmosphere = rdr.GetString(7);
+                string restaurantPrice = rdr.GetString(8);
+                string restaurantPortion = rdr.GetString(9);
+                int restaurantRating = rdr.GetInt32(10);
+                string restaurantComments = rdr.GetString(11);
                 int restaurantId = rdr.GetInt32(0);
 
-                Restaurant newRestaurant = new Restaurant(cuisineId, restaurantName, restaurantStreet1, restaurantStreet2, restaurantCity, restaurantState, restaurantZip, restaurantAtmosphere, restaurantPrice, restaurantPortion, restaurantRating, restaurantComments, restaurantId);
+                Restaurant newRestaurant = new Restaurant(cuisineId, restaurantName, restaurantStreet1, restaurantCity, restaurantState, restaurantZip, restaurantAtmosphere, restaurantPrice, restaurantPortion, restaurantRating, restaurantComments, restaurantId);
                 allCuisineRestaurants.Add(newRestaurant);
             }
             conn.Close();

@@ -24,9 +24,9 @@ namespace BestRestaurants.Controllers
         }
 
         [HttpPost("/restaurants")]
-        public ActionResult SaveRestaurant(int restaurantCuisine, string restaurantName, string restaurantStreet1, string restaurantStreet2, string restaurantCity, string restaurantState, int restaurantZip, string restaurantAtmosphere, string restaurantPrice, string restaurantPortion, int restaurantRating, string restaurantComments)
+        public ActionResult SaveRestaurant(int restaurantCuisine, string restaurantName, string restaurantStreet1, string restaurantCity, string restaurantState, int restaurantZip, string restaurantAtmosphere, string restaurantPrice, string restaurantPortion, int restaurantRating, string restaurantComments)
         {
-            Restaurant newRestaurant = new Restaurant(restaurantCuisine, restaurantName, restaurantStreet1, restaurantStreet2, restaurantCity, restaurantState, restaurantZip, restaurantAtmosphere, restaurantPrice, restaurantPortion, restaurantRating, restaurantComments);
+            Restaurant newRestaurant = new Restaurant(restaurantCuisine, restaurantName, restaurantStreet1, restaurantCity, restaurantState, restaurantZip, restaurantAtmosphere, restaurantPrice, restaurantPortion, restaurantRating, restaurantComments);
             newRestaurant.Save();
             return RedirectToAction("Details", new { id = newRestaurant.Id});
         }
@@ -38,10 +38,39 @@ namespace BestRestaurants.Controllers
             return View(currentRestaurant);
         }
 
-        //[HttpGet("/restaurants/{id}/update")]
-        //public ActionResult Update(int restaurantCuisine, string restaurantName, string restaurantStreet1, string restaurantStreet2, string restaurantCity, string restaurantState, int restaurantZip, string restaurantAtmosphere, string restaurantPrice, string restaurantPortion, int restaurantRating, string restaurantComments)
-        //{
-            
-        //}
+        [HttpGet("/restaurants/delete")]
+        public ActionResult Delete()
+        {
+            return View();
+        }
+
+        [HttpPost("/restaurants/delete")]
+        public ActionResult DeleteAll()
+        {
+            Restaurant.DeleteAll();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost("/restaurants/{id}/delete")]
+        public ActionResult DeleteRestaurant(int id)
+        {
+            Restaurant currentRestaurant = Restaurant.Find(id);
+            currentRestaurant.Delete();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("/restaurants/{id}/update")]
+        public ActionResult Update()
+        {
+            return View();
+        }
+
+        [HttpPost("/restaurants/{id}/update")]
+        public ActionResult Update(int restaurantCuisine, string restaurantName, string restaurantStreet1, string restaurantCity, string restaurantState, int restaurantZip, string restaurantAtmosphere, string restaurantPrice, string restaurantPortion, int restaurantRating, string restaurantComments, int id)
+        {
+            Restaurant currentRestaurant = Restaurant.Find(id);
+            currentRestaurant.Update(restaurantCuisine, restaurantName, restaurantStreet1, restaurantCity, restaurantState, restaurantZip, restaurantAtmosphere, restaurantPrice, restaurantPortion, restaurantRating, restaurantComments, id);
+            return RedirectToAction("Details", new { id = currentRestaurant.Id });
+        }
     }
 }

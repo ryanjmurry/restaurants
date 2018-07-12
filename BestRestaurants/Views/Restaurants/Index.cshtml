@@ -6,12 +6,21 @@
     <div class="jumbotron">
         <h1>My Restaurants</h1>
     </div>
-    <ul>
-    @foreach (var restaurant in Model)
-    {
-        <li><a href="/restaurants/@restaurant.Id">@restaurant.Name</a></li>
-    }
-    </ul>
+@if (Model.Count == 0)
+{
+    <h1>Sorry, no restaurants saved</h1>
+    <a href="/restaurants/new" class="btn btn-success">Add New Restaurant</a>
+}
+else
+{
+        <ul>
+        @foreach (var restaurant in Model)
+        {
+            <li>@restaurant.Name <a href="/restaurants/@restaurant.Id" class="btn btn-sm btn-info">Manage</a></li>
+        }
+        </ul>
 
-    <a href="/restaurants/" class="btn btn-success">Add New Restaurant</a>
+        <a href="/restaurants/new" class="btn btn-success">Add New Restaurant</a>
+        <a href="/restaurants/delete" class="btn btn-success">Delete All Restaurants</a>
+}
 </div>

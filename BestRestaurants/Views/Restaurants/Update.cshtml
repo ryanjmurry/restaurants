@@ -1,31 +1,26 @@
 ﻿@{
 }
 
-<form method="post" action="/restaurants/@Model.CuisineId">
+<form method="post" action="/restaurants/@Model.Id/update">
   <div class="form-group">
     <label for="formGroupExampleInput">Restaurant Name</label>
-    <input value="@Model.Name" type="text" name="restaurantName" class="form-control" id="formGroupExampleInput" placeholder="Hotlips Pizza">
+    <input value="@Model.Name" type="text" name="restaurantName" class="form-control" id="formGroupExampleInput" placeholder="Hotlips Pizza" required>
   </div>
     
   <div class="form-group">
-    <label for="formGroupExampleInput2">Street Address 1</label>
-    <input value="@Model.Street1" type="text" name="restaurantStreet1" class="form-control" id="formGroupExampleInput2" placeholder="1234 SW Main Street">
-  </div>
-    
-  <div class="form-group">
-    <label for="formGroupExampleInput2">Street Address 2</label>
-    <input value="@Model.Street2" type="text" name="restaurantStreet2" class="form-control" id="formGroupExampleInput2" placeholder="Suite 101">
+    <label for="formGroupExampleInput2">Address</label>
+    <input value="@Model.Street1" type="text" name="restaurantStreet1" class="form-control" id="formGroupExampleInput2" placeholder="1234 SW Main Street" required >
   </div>
     
   <div class="form-group">
     <label for="formGroupExampleInput2">City</label>
-    <input value="@Model.City" type="text" name="restaurantCity" class="form-control" id="formGroupExampleInput2" placeholder="Portland">
+    <input value="@Model.City" type="text" name="restaurantCity" class="form-control" id="formGroupExampleInput2" placeholder="Portland" required >
   </div>
     
   <div class="form-group">
       <label for="formGroupExampleInput2">State</label>
-      <select class="form-control">
-        <option name="restaurantState" value="">Select state...</option>
+      <select class="form-control" required >
+        <option name="restaurantState" value="@Model.State">@Model.State</option>
         <option name="restaurantState" value="OR">OR</option>
         <option name="restaurantState" value="WA">WA</option>
         <option name="restaurantState" value="CA" >CA</option>
@@ -34,12 +29,12 @@
     
   <div class="form-group">
     <label for="formGroupExampleInput2">Zip</label>
-    <input value="@Model.Zip" type="number" name="restaurantZip" class="form-control" id="formGroupExampleInput2" placeholder="12345">
+    <input value="@Model.Zip" type="number" name="restaurantZip" class="form-control" id="formGroupExampleInput2" placeholder="12345" required >
   </div>
 
   <div class="form-group">
       <label for="formGroupExampleInput2">Cuisine</label>
-      <select class="form-control">
+      <select class="form-control" required >
         <option name="restaurantState" value="">Select cuisine...</option>
         <option name="restaurantCuisine" value="1">American</option>
         <option name="restaurantCuisine" value="2">Mexican</option>
@@ -57,14 +52,14 @@
     
   <div class="form-group">
     <label for="formGroupExampleInput2">Atmosphere</label>
-    <input value="@Model.Atmosphere" type="text" name="restaurantAtmosphere" class="form-control" id="formGroupExampleInput2" placeholder="Date Night, Casual, etc.">
+    <input value="@Model.Atmosphere" type="text" name="restaurantAtmosphere" class="form-control" id="formGroupExampleInput2" placeholder="Date Night, Casual, etc." required >
   </div>
 
   <div class="form-group">
       <label for="formGroupExampleInput2">Price</label>
         <br>
       <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="restaurantPrice" id="exampleRadios1" value="option1">
+          <input class="form-check-input" type="radio" name="restaurantPrice" id="exampleRadios1" value="option1" checked >
           <label class="form-check-label" for="exampleRadios1">
             $
           </label>
@@ -91,7 +86,7 @@
     
   <div class="form-group">
       <label for="formGroupExampleInput2">Portion</label>
-      <select class="form-control">
+      <select class="form-control" required >
         <option name="restaurantState" value="">Select size...</option>
         <option name="restaurantPortion">Small</option>
         <option name="restaurantPortion">Standard</option>
@@ -104,7 +99,7 @@
       <label for="formGroupExampleInput2">Rating</label>
         <br>
        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="restaurantRating" id="exampleRadios1" value="option1">
+          <input class="form-check-input" type="radio" name="restaurantRating" id="exampleRadios1" value="option1" checked>
           <label class="form-check-label" for="exampleRadios1">
             1
           </label>
@@ -137,9 +132,9 @@
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Comments</label>
-    <textarea value="@Model.Comments" class="form-control" name="restaurantComments" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea value="@Model.Comments" class="form-control" name="restaurantComments" id="exampleFormControlTextarea1" rows="3" required ></textarea>
   </div>
 
-    <button class="btn btn-primary" type="submit"></button>
+    <button class="btn btn-primary" type="submit">Update</button>
 </form>
 

@@ -22,8 +22,8 @@ namespace BestRestaurants.Tests
         [TestMethod]
         public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Restaurant()
         {
-            Restaurant firstRestaurant = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5 , "test comment");
-            Restaurant secondRestaurant = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            Restaurant firstRestaurant = new Restaurant(1, "test name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5 , "test comment");
+            Restaurant secondRestaurant = new Restaurant(1, "test name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
 
             Assert.AreEqual(firstRestaurant, secondRestaurant);
         }
@@ -39,7 +39,7 @@ namespace BestRestaurants.Tests
         public void Save_SavesToDatabase_RestaurantList()
         {
             //Arrange
-            Restaurant testRestaurant = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5 , "test comment");
+            Restaurant testRestaurant = new Restaurant(1, "test name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5 , "test comment");
 
             //Act
             testRestaurant.Save();
@@ -54,7 +54,7 @@ namespace BestRestaurants.Tests
         [TestMethod]
         public void Find_FindsRestaurantInDatabase_Restaurant()
         {
-            Restaurant testRestaurant = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            Restaurant testRestaurant = new Restaurant(1, "test name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             testRestaurant.Save();
 
             Restaurant foundRestaurant = Restaurant.Find(testRestaurant.Id);
@@ -65,9 +65,9 @@ namespace BestRestaurants.Tests
         [TestMethod]
         public void Update_UpdatesRestaurantInDatabase_Restaurant()
         {
-            Restaurant testRestaurant = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            Restaurant testRestaurant = new Restaurant(1, "test name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             testRestaurant.Save();
-            testRestaurant.Update(1, "new name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            testRestaurant.Update(1, "new name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             string result = Restaurant.Find(testRestaurant.Id).Name;
             Assert.AreEqual("new name", result);
         }
@@ -75,11 +75,11 @@ namespace BestRestaurants.Tests
         [TestMethod]
         public void Delete_DeleteSingleRestaurantFromDatabase_DeletesRestaurant()
         {
-            Restaurant newRestaurant1 = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            Restaurant newRestaurant1 = new Restaurant(1, "test name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             newRestaurant1.Save();
-            Restaurant newRestaurant2 = new Restaurant(1, "new name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            Restaurant newRestaurant2 = new Restaurant(1, "new name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             newRestaurant2.Save();
-            newRestaurant1.Delete(newRestaurant1.Id);
+            newRestaurant1.Delete();
 
             List<Restaurant> restaurantList = new List<Restaurant> { newRestaurant2 };
             List<Restaurant> result = Restaurant.GetAll();
@@ -90,13 +90,13 @@ namespace BestRestaurants.Tests
         [TestMethod]
         public void DeleteByCuisine_DeletesAllRestaurantsWithCuisine_RestaurantList()
         {
-            Restaurant testRestaurantOne = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            Restaurant testRestaurantOne = new Restaurant(1, "test name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             testRestaurantOne.Save();
 
-            Restaurant testRestaurantTwo = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            Restaurant testRestaurantTwo = new Restaurant(1, "test name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             testRestaurantTwo.Save();
 
-            Restaurant testRestaurantThree = new Restaurant(2, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            Restaurant testRestaurantThree = new Restaurant(2, "test name", "test street1", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             testRestaurantThree.Save();
 
             Restaurant.DeleteByCuisine(testRestaurantOne.CuisineId);
