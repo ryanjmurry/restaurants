@@ -23,10 +23,25 @@ namespace BestRestaurants.Controllers
             return View();
         }
 
-        [HttpPost("/restaurants/{id}")]
-        public ActionResult Details()
+        [HttpPost("/restaurants")]
+        public ActionResult SaveRestaurant(int restaurantCuisine, string restaurantName, string restaurantStreet1, string restaurantStreet2, string restaurantCity, string restaurantState, int restaurantZip, string restaurantAtmosphere, string restaurantPrice, string restaurantPortion, int restaurantRating, string restaurantComments)
         {
-            return View();
+            Restaurant newRestaurant = new Restaurant(restaurantCuisine, restaurantName, restaurantStreet1, restaurantStreet2, restaurantCity, restaurantState, restaurantZip, restaurantAtmosphere, restaurantPrice, restaurantPortion, restaurantRating, restaurantComments);
+            newRestaurant.Save();
+            return RedirectToAction("Details", new { id = newRestaurant.Id});
         }
+
+        [HttpGet("/restaurants/{id}")]
+        public ActionResult Details(int id)
+        {
+            Restaurant currentRestaurant = Restaurant.Find(id);
+            return View(currentRestaurant);
+        }
+
+        //[HttpGet("/restaurants/{id}/update")]
+        //public ActionResult Update(int restaurantCuisine, string restaurantName, string restaurantStreet1, string restaurantStreet2, string restaurantCity, string restaurantState, int restaurantZip, string restaurantAtmosphere, string restaurantPrice, string restaurantPortion, int restaurantRating, string restaurantComments)
+        //{
+            
+        //}
     }
 }

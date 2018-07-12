@@ -1,5 +1,145 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 }
+
+<form method="post" action="/restaurants/@Model.CuisineId">
+  <div class="form-group">
+    <label for="formGroupExampleInput">Restaurant Name</label>
+    <input value="@Model.Name" type="text" name="restaurantName" class="form-control" id="formGroupExampleInput" placeholder="Hotlips Pizza">
+  </div>
+    
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Street Address 1</label>
+    <input value="@Model.Street1" type="text" name="restaurantStreet1" class="form-control" id="formGroupExampleInput2" placeholder="1234 SW Main Street">
+  </div>
+    
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Street Address 2</label>
+    <input value="@Model.Street2" type="text" name="restaurantStreet2" class="form-control" id="formGroupExampleInput2" placeholder="Suite 101">
+  </div>
+    
+  <div class="form-group">
+    <label for="formGroupExampleInput2">City</label>
+    <input value="@Model.City" type="text" name="restaurantCity" class="form-control" id="formGroupExampleInput2" placeholder="Portland">
+  </div>
+    
+  <div class="form-group">
+      <label for="formGroupExampleInput2">State</label>
+      <select class="form-control">
+        <option name="restaurantState" value="">Select state...</option>
+        <option name="restaurantState" value="OR">OR</option>
+        <option name="restaurantState" value="WA">WA</option>
+        <option name="restaurantState" value="CA" >CA</option>
+      </select>
+  </div>
+    
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Zip</label>
+    <input value="@Model.Zip" type="number" name="restaurantZip" class="form-control" id="formGroupExampleInput2" placeholder="12345">
+  </div>
+
+  <div class="form-group">
+      <label for="formGroupExampleInput2">Cuisine</label>
+      <select class="form-control">
+        <option name="restaurantState" value="">Select cuisine...</option>
+        <option name="restaurantCuisine" value="1">American</option>
+        <option name="restaurantCuisine" value="2">Mexican</option>
+        <option name="restaurantCuisinee" value="3">Chinese</option>
+        <option name="restaurantCuisine" value="4">Thai</option>
+        <option name="restaurantCuisine" value="5">Indian</option>
+        <option name="restaurantCuisine" value="6">Japanese</option>
+        <option name="restaurantCuisine" value="7">Italian</option>
+        <option name="restaurantCuisine" value="8">Vegetarian / Vegan</option>
+        <option name="restaurantCuisine" value="9">Pub / Bar</option>
+        <option name="restaurantCuisine" value="10">Korean</option>
+        <option name="restaurantCuisine" value="11">Fusion / Hybrid</option>
+      </select>
+  </div>
+    
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Atmosphere</label>
+    <input value="@Model.Atmosphere" type="text" name="restaurantAtmosphere" class="form-control" id="formGroupExampleInput2" placeholder="Date Night, Casual, etc.">
+  </div>
+
+  <div class="form-group">
+      <label for="formGroupExampleInput2">Price</label>
+        <br>
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="restaurantPrice" id="exampleRadios1" value="option1">
+          <label class="form-check-label" for="exampleRadios1">
+            $
+          </label>
+       </div>
+       <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="restaurantPrice" id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            $$
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="restaurantPrice" id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            $$$
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="restaurantPrice" id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            $$$$
+          </label>
+        </div>
+   </div>
+    
+  <div class="form-group">
+      <label for="formGroupExampleInput2">Portion</label>
+      <select class="form-control">
+        <option name="restaurantState" value="">Select size...</option>
+        <option name="restaurantPortion">Small</option>
+        <option name="restaurantPortion">Standard</option>
+        <option name="restaurantPortion">Large</option>
+        <option name="restaurantPortion">Shareable</option>
+      </select>
+    </div>  
+
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Rating</label>
+        <br>
+       <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="restaurantRating" id="exampleRadios1" value="option1">
+          <label class="form-check-label" for="exampleRadios1">
+            1
+          </label>
+       </div>
+       <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="restaurantRating" id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            2
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="restaurantRating" id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            3
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="restaurantRating" id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            4
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="restaurantRating" id="exampleRadios2" value="option2">
+          <label class="form-check-label" for="exampleRadios2">
+            5
+          </label>
+        </div>
+    </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Comments</label>
+    <textarea value="@Model.Comments" class="form-control" name="restaurantComments" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+
+    <button class="btn btn-primary" type="submit"></button>
+</form>
+

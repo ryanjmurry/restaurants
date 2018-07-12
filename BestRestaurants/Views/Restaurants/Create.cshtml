@@ -1,9 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "New Restaurant";
 }
-<form method="post" action="/restaurants/details">
+<form method="post" action="/restaurants">
   <div class="form-group">
     <label for="formGroupExampleInput">Restaurant Name</label>
     <input type="text" name="restaurantName" class="form-control" id="formGroupExampleInput" placeholder="Hotlips Pizza">
@@ -26,21 +24,40 @@
     
   <div class="form-group">
       <label for="formGroupExampleInput2">State</label>
-      <select class="form-control">
-        <option name="restaurantState" value="OR">OR</option>
-        <option name="restaurantState" value="WA">WA</option>
-        <option name="restaurantState" value="CA" >CA</option>
+      <select name="restaurantState" class="form-control">
+        <option value="">Select state...</option>
+        <option value="OR">OR</option>
+        <option value="WA">WA</option>
+        <option value="CA" >CA</option>
       </select>
   </div>
     
   <div class="form-group">
     <label for="formGroupExampleInput2">Zip</label>
-    <input type="text" name="restaurantZip" class="form-control" id="formGroupExampleInput2" placeholder="12345">
+    <input type="number" name="restaurantZip" class="form-control" id="formGroupExampleInput2" placeholder="12345">
   </div>
 
   <div class="form-group">
+      <label for="formGroupExampleInput2">Cuisine</label>
+      <select class="form-control">
+        <option name="restaurantState" value="">Select cuisine...</option>
+        <option name="restaurantCuisine" value="1">American</option>
+        <option name="restaurantCuisine" value="2">Mexican</option>
+        <option name="restaurantCuisinee" value="3">Chinese</option>
+        <option name="restaurantCuisine" value="4">Thai</option>
+        <option name="restaurantCuisine" value="5">Indian</option>
+        <option name="restaurantCuisine" value="6">Japanese</option>
+        <option name="restaurantCuisine" value="7">Italian</option>
+        <option name="restaurantCuisine" value="8">Vegetarian / Vegan</option>
+        <option name="restaurantCuisine" value="9">Pub / Bar</option>
+        <option name="restaurantCuisine" value="10">Korean</option>
+        <option name="restaurantCuisine" value="11">Fusion / Hybrid</option>
+      </select>
+  </div>
+    
+  <div class="form-group">
     <label for="formGroupExampleInput2">Atmosphere</label>
-    <input type="text" name="restaurantAtmosphere" class="form-control" id="formGroupExampleInput2" placeholder="Date Night">
+    <input type="text" name="restaurantAtmosphere" class="form-control" id="formGroupExampleInput2" placeholder="Date Night, Casual, etc.">
   </div>
 
   <div class="form-group">
@@ -74,11 +91,11 @@
     
   <div class="form-group">
       <label for="formGroupExampleInput2">Portion</label>
-      <select class="form-control">
-        <option name="restaurantPortion">Small</option>
-        <option name="restaurantPortion">Standard</option>
-        <option name="restaurantPortion">Large</option>
-        <option name="restaurantPortion">Shareable</option>
+      <select name="restaurantPortion" class="form-control">
+        <option>Small</option>
+        <option>Standard</option>
+        <option>Large</option>
+        <option>Shareable</option>
       </select>
     </div>  
 
