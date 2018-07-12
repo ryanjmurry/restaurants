@@ -17,6 +17,16 @@ namespace BestRestaurants.Controllers
             return View(restaurantList);
         }
 
+        [HttpGet("/restaurants/new")]
+        public ActionResult Create()
+        {
+            return View();
+        }
 
+        [HttpPost("/restaurants/{id}")]
+        public ActionResult Details()
+        {
+            return View();
+        }
     }
 }

@@ -37,6 +37,30 @@ namespace BestRestaurants.Models
             return this.Type.GetHashCode();
         }
 
+        public static List<Cuisine> GetAll()
+        {
+            List<Cuisine> allCuisines = new List<Cuisine> { };
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM cuisines;";
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while (rdr.Read())
+            {
+                int cuisineId = rdr.GetInt32(0);
+                string cuisineType = rdr.GetString(1);
+                Cuisine newCuisine = new Cuisine(cuisineId, cuisineType);
+                allCuisines.Add(newCuisine);
+            }
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return allCuisines;
+        }
+
         public static Cuisine Find(int id)
         {
             MySqlConnection conn = DB.Connection();
@@ -73,7 +97,8 @@ namespace BestRestaurants.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM restaurants WHERE cuisine_id = " + cId + ";";
+            cmd.CommandText = @"SELECT * FROM restaurants WHERE cuisine_id = @CuisineId;";
+            cmd.Parameters.AddWithValue("@CuisineId", cId);
 
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
             while (rdr.Read())

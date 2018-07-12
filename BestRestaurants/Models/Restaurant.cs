@@ -122,29 +122,17 @@ namespace BestRestaurants.Models
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"INSERT INTO restaurants (cuisine_id, name, street_address_1, street_address_2, city, state, zip, atmosphere, price, portion, rating, comments) VALUES (@RestaurantCuisineId, @RestaurantName, @RestaurantStreet_address_1, @RestaurantStreet_address_2, @RestaurantCity, @RestaurantState, @RestaurantZip, @RestaurantAtmosphere, @RestaurantPrice, @RestaurantPortion, @RestaurantRating, @RestaurantComments);";
 
-            MySqlParameter cuisine_id = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantCuisineId", this.CuisineId);
-            MySqlParameter name = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantName", this.Name);
-            MySqlParameter street_address_1 = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantStreet_address_1", this.Street1);
-            MySqlParameter street_address_2 = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantStreet_address_2", this.Street2);
-            MySqlParameter city = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantCity", this.City);
-            MySqlParameter state = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantState", this.State);
-            MySqlParameter zip = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantZip", this.Zip);
-            MySqlParameter atmosphere = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantAtmosphere", this.Atmosphere);
-            MySqlParameter price = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantPrice", this.Price);
-            MySqlParameter portion = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantPortion", this.Portion);
-            MySqlParameter rating = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantRating", this.Rating);
-            MySqlParameter comments = new MySqlParameter();
             cmd.Parameters.AddWithValue("@RestaurantComments", this.Comments);
 
             cmd.ExecuteNonQuery();
@@ -215,47 +203,82 @@ namespace BestRestaurants.Models
             return foundRestaurant;
         }
 
-        //public void Update()
-        //{
-        //    MySqlConnection conn = DB.Connection();
-        //    conn.Open();
-        //    var cmd = conn.CreateCommand() as MySqlCommand;
-        //    cmd.CommandText = @"UPDATE restaurants SET type = @AnimalType, breed = @AnimalBreed, gender = @AnimalGender, name = @AnimalName WHERE id = @AnimalId;";
+        public void Update(int cuisineId, string restaurantName, string restaurantStreet1, string restaurantStreet2, string restaurantCity, string restaurantState, int restaurantZip, string restaurantAtmosphere, string restaurantPrice, string restaurantPortion, int restaurantRating, string restaurantComments)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE restaurants SET cuisine_id = @RestaurantCuisineId, name = @RestaurantName, street_address_1 = @RestaurantStreet_address_1, street_address_2 = @RestaurantStreet_address_2, city = @RestaurantCity, state = @RestaurantState, zip = @RestaurantZip, atmosphere = @RestaurantAtmosphere, price = @RestaurantPrice, portion = @RestaurantPortion, rating = @RestaurantRating, comments = @RestaurantComments WHERE id = @RestaurantId;";
 
-        //    MySqlParameter cuisine_id = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantCuisineId", this.CuisineId);
-        //    MySqlParameter name = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantName", this.Name);
-        //    MySqlParameter street_address_1 = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantStreet_address_1", this.Street1);
-        //    MySqlParameter street_address_2 = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantStreet_address_2", this.Street2);
-        //    MySqlParameter city = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantCity", this.City);
-        //    MySqlParameter state = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantState", this.State);
-        //    MySqlParameter zip = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantZip", this.Zip);
-        //    MySqlParameter atmosphere = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantAtmosphere", this.Atmosphere);
-        //    MySqlParameter price = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantPrice", this.Price);
-        //    MySqlParameter portion = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantPortion", this.Portion);
-        //    MySqlParameter rating = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantRating", this.Rating);
-        //    MySqlParameter comments = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantComments", this.Comments);
-        //    MySqlParameter id = new MySqlParameter();
-        //    cmd.Parameters.AddWithValue("@RestaurantId", this.Id);
+            cmd.Parameters.AddWithValue("@RestaurantId", this.Id);
+            cmd.Parameters.AddWithValue("@RestaurantCuisineId", cuisineId);
+            cmd.Parameters.AddWithValue("@RestaurantName", restaurantName);
+            cmd.Parameters.AddWithValue("@RestaurantStreet_address_1", restaurantStreet1);
+            cmd.Parameters.AddWithValue("@RestaurantStreet_address_2", restaurantStreet2);
+            cmd.Parameters.AddWithValue("@RestaurantCity", restaurantCity);
+            cmd.Parameters.AddWithValue("@RestaurantState", restaurantState);
+            cmd.Parameters.AddWithValue("@RestaurantZip", restaurantZip);
+            cmd.Parameters.AddWithValue("@RestaurantAtmosphere", restaurantAtmosphere);
+            cmd.Parameters.AddWithValue("@RestaurantPrice", restaurantPrice);
+            cmd.Parameters.AddWithValue("@RestaurantPortion", restaurantPortion);
+            cmd.Parameters.AddWithValue("@RestaurantRating", restaurantRating);
+            cmd.Parameters.AddWithValue("@RestaurantComments", restaurantComments);
 
-        //    cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
+            Id = this.Id;
+            CuisineId = cuisineId;
+            Name = restaurantName;
+            Street1 = restaurantStreet1;
+            Street2 = restaurantStreet2;
+            City = restaurantCity;
+            State = restaurantState;
+            Zip = restaurantZip;
+            Atmosphere = restaurantAtmosphere;
+            Price = restaurantPrice;
+            Portion = restaurantPortion;
+            Rating = restaurantRating;
+            Comments = restaurantComments;
 
-        //    conn.Close();
-        //    if (conn != null)
-        //    {
-        //        conn.Dispose();
-        //    }
-        //}
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM restaurants WHERE id = @RestaurantId;";
+
+            cmd.Parameters.AddWithValue("@RestaurantId", id);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public static void DeleteByCuisine(int cId)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM restaurants WHERE cuisine_id = @CuisineId;";
+            cmd.Parameters.AddWithValue("@CuisineId", cId);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
     }
 }

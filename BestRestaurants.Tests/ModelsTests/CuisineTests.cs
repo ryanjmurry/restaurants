@@ -14,7 +14,7 @@ namespace BestRestaurants.Tests
         }
 
         [TestMethod]
-        public void Find_FindsCategoryInDatabase_Category()
+        public void Find_FindsCuisineInDatabase_Cuisine()
         {
             //Act
             Cuisine foundCuisine = Cuisine.Find(1);
@@ -28,5 +28,31 @@ namespace BestRestaurants.Tests
         {
             Restaurant.DeleteAll();
         }
+
+        [TestMethod]
+        public void GetItems_RetrievesAllRestaurantsWithCuisine_RestaurantList()
+        {
+            Cuisine testCuisine = new Cuisine(1, "american");
+
+            Restaurant testRestaurantOne = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+
+            testRestaurantOne.Save();
+            Restaurant testRestaurantTwo = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            testRestaurantTwo.Save();
+
+            List<Restaurant> testRestaurantList = new List<Restaurant> { testRestaurantOne, testRestaurantTwo };
+            List<Restaurant> resultRestaurantList = testCuisine.GetRestaurantsByCuisine(1);
+
+            CollectionAssert.AreEqual(testRestaurantList, resultRestaurantList);
+        }
+
+        [TestMethod]
+        public void GetAll_GetsAllCuisinesFromDatabase_CuisineList()
+        {
+            int result = Cuisine.GetAll().Count;
+            Assert.AreEqual(11, result);
+        }
+
+
     }
 }

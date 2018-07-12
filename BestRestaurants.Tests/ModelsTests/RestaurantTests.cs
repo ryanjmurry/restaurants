@@ -52,7 +52,7 @@ namespace BestRestaurants.Tests
         }
 
         [TestMethod]
-        public void Find_FindsItemInDatabase_Restaurant()
+        public void Find_FindsRestaurantInDatabase_Restaurant()
         {
             Restaurant testRestaurant = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             testRestaurant.Save();
@@ -63,20 +63,48 @@ namespace BestRestaurants.Tests
         }
 
         [TestMethod]
-        public void GetItems_RetrievesAllItemsWithCategory_ItemList()
+        public void Update_UpdatesRestaurantInDatabase_Restaurant()
         {
-            Cuisine testCuisine = new Cuisine(1, "american");
+            Restaurant testRestaurant = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            testRestaurant.Save();
+            testRestaurant.Update(1, "new name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            string result = Restaurant.Find(testRestaurant.Id).Name;
+            Assert.AreEqual("new name", result);
+        }
 
+        [TestMethod]
+        public void Delete_DeleteSingleRestaurantFromDatabase_DeletesRestaurant()
+        {
+            Restaurant newRestaurant1 = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            newRestaurant1.Save();
+            Restaurant newRestaurant2 = new Restaurant(1, "new name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            newRestaurant2.Save();
+            newRestaurant1.Delete(newRestaurant1.Id);
+
+            List<Restaurant> restaurantList = new List<Restaurant> { newRestaurant2 };
+            List<Restaurant> result = Restaurant.GetAll();
+
+            CollectionAssert.AreEqual(result, restaurantList);
+        }
+
+        [TestMethod]
+        public void DeleteByCuisine_DeletesAllRestaurantsWithCuisine_RestaurantList()
+        {
             Restaurant testRestaurantOne = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
-
             testRestaurantOne.Save();
+
             Restaurant testRestaurantTwo = new Restaurant(1, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
             testRestaurantTwo.Save();
 
-            List<Restaurant> testRestaurantList = new List<Restaurant> { testRestaurantOne, testRestaurantTwo };
-            List<Restaurant> resultRestaurantList = testCuisine.GetRestaurantsByCuisine(1);
+            Restaurant testRestaurantThree = new Restaurant(2, "test name", "test street1", "test street2", "test city", "test state", 673812, "test atmosphere", "test price", "test portion", 5, "test comment");
+            testRestaurantThree.Save();
 
-            CollectionAssert.AreEqual(testRestaurantList, resultRestaurantList);
+            Restaurant.DeleteByCuisine(testRestaurantOne.CuisineId);
+
+            List<Restaurant> testRestaurantList = new List<Restaurant> { testRestaurantThree };
+            List<Restaurant> result = Restaurant.GetAll();
+
+            CollectionAssert.AreEqual(testRestaurantList, result);
         }
     }
 }
